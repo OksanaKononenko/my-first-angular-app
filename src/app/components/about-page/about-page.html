@@ -1,0 +1,22 @@
+<p>about-page works!</p>
+<h2>Наша команда</h2>
+
+<div class="cards-container">
+
+  @for (person of teamMembers; track person.name) {
+    
+    <div class="card">
+     <img src="1.png" alt="Фото команди" width="200">      <!--   однакове фото для всіх учасників  -->
+            
+      <h3>{{ person.name }}</h3>
+      <p><strong>Посада:</strong> {{ person.role }}</p>
+      <p><strong>Вік:</strong> {{ person.age }}</p>
+      <p><strong>Email:</strong> {{ person.email }}</p>
+      <p><strong>Телефон:</strong> {{ person.telephone }}</p>
+<img src="{{ person.image }}" alt="Фото команди" width="200">   <!--  різні фото для кожного учасника -->
+
+    </div>
+
+  }
+
+</div>

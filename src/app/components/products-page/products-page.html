@@ -1,0 +1,17 @@
+<p>products-page works!</p>
+
+
+<h2>Наші товари</h2>
+
+<div style="display: flex; gap: 20px; flex-wrap: wrap;">
+  @for (item of productsList; track item.name) {
+    <app-product-card 
+  
+[name]="item.name" 
+      [price]="item.price"
+      [imageUrl]="item.imageUrl"
+      [quantity]="item.quantity">
+      
+    </app-product-card>
+  }
+</div>

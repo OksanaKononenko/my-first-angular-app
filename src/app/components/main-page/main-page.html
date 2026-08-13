@@ -1,0 +1,23 @@
+<p>My main-page works!</p>
+
+<h1>Привіт, {{ userName }}!</h1>
+<p>Тобі {{ userAge }} років.</p>
+
+
+
+
+<h2>Ласкаво просимо!</h2>
+
+<button (click)="showMessage()">Дізнатися більше</button>
+
+
+
+<h2>Ласкаво просимо, {{ userName }}!</h2>
+
+<button (click)="toggleMessage()">Отримати подарунок</button>
+
+@if (showSecretMessage) {
+  <div style="background-color: yellow; padding: 10px; margin-top: 10px;">
+    <p>🎉 Твій секретний промокод: <strong>ANGULAR2024</strong></p>
+  </div>
+}

@@ -1,0 +1,25 @@
+<p>contacts-page works!</p>
+<h2>Наші контакти</h2>
+
+@for (network of socialNetworks; track network) {
+  <p>Ми в мережі: {{ network }}</p>
+}@empty {
+  <p>На жаль, список контактів зараз порожній.</p>
+}
+
+
+<hr>
+
+@for (network of socialNetworksUrl; track network) {
+  <p>Ми в мережі: <a href="{{ network.url }}" target="_blank"> {{ network.name }}</a></p>
+}@empty {
+  <p>На жаль, список контактів зараз порожній.</p>
+}
+
+
+<hr> <h3>Телефони для зв'язку:</h3>
+<ul>
+  @for (phone of phoneNumbers; track phone) {
+    <li>{{ phone }}</li>
+  }
+</ul>
