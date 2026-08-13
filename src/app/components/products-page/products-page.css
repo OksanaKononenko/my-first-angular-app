@@ -1,0 +1,7 @@
+.products-grid {
+  display: flex;
+  gap: 85px;
+  flex-wrap: wrap;
+  justify-content: center; /* Центруємо картки на сторінці */
+  padding: 20px 0;
+}
