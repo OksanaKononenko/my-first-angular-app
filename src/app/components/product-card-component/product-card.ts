@@ -8,7 +8,7 @@
 // })
 // export class ProductCard {}
 
-import { Component, Input } from '@angular/core'; // Обов'язково додаємо Input сюди
+import { Component, Input, Output, EventEmitter } from '@angular/core'; // '@angular/core' це модуль, який містить основні функціональні можливості Angular, включаючи декоратори та інші інструменти для створення компонентів, директив та сервісів. 
 
 @Component({
   selector: 'app-product-card',
@@ -23,5 +23,11 @@ export class ProductCardComponent {
   @Input() price = 0;
   @Input() quantity = 0;
 
+// Вказуємо <void>, бо передаємо лише сигнал, без даних
+  @Output() buyEvent = new EventEmitter<void>();
 
+  onBuyClick() {
+    // Викликаємо emit() з порожніми дужками!
+    this.buyEvent.emit(); 
+  }
 }

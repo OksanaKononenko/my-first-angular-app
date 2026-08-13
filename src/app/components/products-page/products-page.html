@@ -10,7 +10,10 @@
 [name]="item.name" 
       [price]="item.price"
       [imageUrl]="item.imageUrl"
-      [quantity]="item.quantity">
+      [quantity]="item.quantity"
+      
+      (buyEvent)="onProductBought()"
+      >
       
     </app-product-card>
   }
