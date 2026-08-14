@@ -21,8 +21,21 @@ productsList = [
   ];
 
 // Функція просто фіксує, що сигнал надійшов
-  onProductBought() {
-    console.log('Сигнал отримано! Хтось натиснув кнопку "Купити".');
-  }
+  // onProductBought() {
+  //   console.log('Сигнал отримано! Хтось натиснув кнопку "Купити".');
+  // }
 
+  //  функція очікує 3 аргументи (рядки тексту)
+// onProductBought(productName: string, productPrice: string, productQuantity: string) {
+//   console.log('Ураававк! Ми додали в кошик товар:', productName);
+//   console.log('Ціна:', productPrice);
+//   console.log('Кількість:', productQuantity);
+// }
+
+// ПРАВИЛЬНО: Функція приймає 1 аргумент (об'єкт із даними)
+onProductBought(productData: {name: string, price: number, quantity: number}) {
+  console.log('Ми отримали товар:', productData.name);
+  console.log('Його ціна:', productData.price);
+  console.log('Залишок на складі:', productData.quantity);
+}
 }

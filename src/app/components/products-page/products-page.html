@@ -11,10 +11,13 @@
       [price]="item.price"
       [imageUrl]="item.imageUrl"
       [quantity]="item.quantity"
-      
-      (buyEvent)="onProductBought()"
+
+ (buyEvent)="onProductBought($event)">  
       >
-      
+    <!-- (buyEvent)="onProductBought()"  отримуємо рядко  -->
+   <!--  (buyEvent)="onProductBought($event)">  отримуємо рядкові дані  -->
+    
+    
     </app-product-card>
   }
 </div>

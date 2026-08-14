@@ -23,11 +23,17 @@ export class ProductCardComponent {
   @Input() price = 0;
   @Input() quantity = 0;
 
-// Вказуємо <void>, бо передаємо лише сигнал, без даних
-  @Output() buyEvent = new EventEmitter<void>();
+// Вказуємо <void>, коли передаємо лише сигнал, без даних
+//   використовуємо EventEmitter<string>, щоб вказати, що подія buyEvent може передавати рядкові дані (string) при її виклику. 
+  // @Output() buyEvent = new EventEmitter<string>(); виводить одне значення, а нам потрібно виводити три значення (назву, ціну та кількість товару). Тому ми можемо використовувати EventEmitter<string> для кожного з цих значень окремо.
+// або Вказуємо, що будемо передавати об'єкт із трьома властивостями
+@Output() buyEvent = new EventEmitter<{name: string, price: number, quantity: number}>();
 
   onBuyClick() {
     // Викликаємо emit() з порожніми дужками!
-    this.buyEvent.emit(); 
-  }
+    // this.buyEvent.emit(); 
+
+    // Відправляємо назву товару назовні
+    this.buyEvent.emit({name: this.name, price: this.price, quantity: this.quantity});     
+}
 }
