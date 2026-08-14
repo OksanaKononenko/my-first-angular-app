@@ -7,5 +7,12 @@
 
   <p>Ціна: {{ price }} грн</p>
   <p>Кількість: {{ quantity }} шт.</p>
-<button (click)="onBuyClick()">Купити</button>
+<!-- <button (click)="onBuyClick()">Купити</button> -->
+ <button (click)="onBuyClick()" [disabled]="quantity === 0">
+    @if (quantity > 0) {
+      Купити
+    } @else {
+      Немає в наявності
+    }
+  </button>
 </div>

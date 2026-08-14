@@ -37,5 +37,15 @@ onProductBought(productData: {name: string, price: number, quantity: number}) {
   console.log('Ми отримали товар:', productData.name);
   console.log('Його ціна:', productData.price);
   console.log('Залишок на складі:', productData.quantity);
+
+
+  // 1. Шукаємо цей конкретний товар у нашому масиві productsList за назвою
+    const currentProduct = this.productsList.find(item => item.name === productData.name);
+
+    // 2. Якщо товар знайдено і його кількість більше нуля — віднімаємо 1
+    if (currentProduct && currentProduct.quantity > 0) {
+      currentProduct.quantity--; // Зменшуємо на 1
+      console.log(`Товар "${currentProduct.name}" додано! Залишок: ${currentProduct.quantity}`);
+    }
 }
 }
