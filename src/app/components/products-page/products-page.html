@@ -17,6 +17,9 @@
  >  
      </app-product-card>  }   
 
+ 
+    
+
     <!-- (buyEvent)="onProductBought()"  отримуємо рядко  -->
    <!--  (buyEvent)="onProductBought($event)">  отримуємо рядкові дані 
 
@@ -27,4 +30,34 @@
   (buyEvent)="addToCart($event)"> </app-product-card>   -->
    
 
+</div>
+
+
+
+<!-- 3. Показуємо повідомлення ТІЛЬКИ якщо змінна lastAddedProduct не порожня -->
+@if (lastAddedProduct) {
+  <p style="color: green;">
+    ✅ Щойно додано у кошик: <strong>{{ lastAddedProduct }}</strong>
+  </p>
+}
+
+<hr>  
+
+<div class="cart-summary">
+  <h2>Мій кошик</h2>
+  <p>Всього товарів: {{ cart.length }} шт.</p>
+
+  <!-- Починаємо виводити список -->
+  <ul>
+    @for (product of cart; track $index) {
+      <li>
+        <strong>{{ product.name }}</strong> — ціна: {{ product.price }} грн — кількість: {{ product.quantity }} шт. —  ціна за товар: {{ product.totalPrice }} грн
+    
+    </li>
+      
+    } @empty {
+      <li>Твій кошик поки що порожній. Час щось обрати!</li>
+    }
+    <strong>Bсього </strong>  : {{ cart.reduce((total, item) => total + item.totalPrice, 0) }} грн
+  </ul>
 </div>

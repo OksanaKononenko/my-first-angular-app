@@ -60,29 +60,56 @@ onProductBought(productData: {name: string, price: number, quantity: number}) {
 // Масив товарів у кошику
   cart: CartItem[] = [];
 
-
+// 1. Створюємо змінну, яка буде зберігати назву останнього доданого товару
+  lastAddedProduct = '';
   
 // 2. Функція додає товар у кошик
-  addToCart(productData: { name: string; price: number }) {
+//   addToCart(productData: { name: string; price: number }) {
+//     const existingItem = this.cart.find(item => item.name === productData.name);
+
+//     if (existingItem) {
+//       existingItem.quantity += 1;
+//       existingItem.totalPrice = existingItem.quantity * existingItem.price;
+//     } else {
+//       // ✅ ПРАВИЛЬНО: Створюємо повноцінний об'єкт
+//       this.cart.push({
+//         name: productData.name,
+//         price: productData.price,
+//         quantity: 1,                  // Встановлюємо стартову кількість
+//         totalPrice: productData.price // Стартова сума дорівнює ціні одного товару
+//       });  
+//     }
+// // 2. Зберігаємо назву товару в змінну класу, щоб HTML міг її побачити
+//     this.lastAddedProduct = productData.name;
+
+//     // ✅ ВСІ ЛОГИ ПИШЕМО ТУТ (після if/else)
+//     console.log('Поточний вміст кошика:', this.cart);
+//     console.log('Назва щойно доданого товару:', productData.name); 
+//     console.log('Назви товарів у кошику:', this.cart.map(item => item.name).join(', '));
+//     console.log('Кількість унікальних товарів у кошику:', this.cart.length);
+//     console.log('Загальна сума в кошику:', this.cart.reduce((total, item) => total + item.totalPrice, 0));
+//   }}
+
+addToCart(productData: { name: string; price: number }) {
     const existingItem = this.cart.find(item => item.name === productData.name);
 
     if (existingItem) {
+      // ✅ Тепер це точно спрацює, якщо об'єкт створено правильно
       existingItem.quantity += 1;
       existingItem.totalPrice = existingItem.quantity * existingItem.price;
     } else {
-      // ✅ ПРАВИЛЬНО: Створюємо повноцінний об'єкт
+      // Створюємо повноцінний об'єкт
       this.cart.push({
         name: productData.name,
         price: productData.price,
-        quantity: 1,                  // Встановлюємо стартову кількість
-        totalPrice: productData.price // Стартова сума дорівнює ціні одного товару
-      }); // <--- САМЕ ТУТ МАЮТЬ БУТИ ЗАКРИВАЮЧІ ДУЖКИ
+        quantity: 1,                  
+        totalPrice: productData.price 
+      }); // ✅ ТУТ ТЕПЕР Є ЗАКРИВАЮЧІ ДУЖКИ
     }
 
-    // ✅ ВСІ ЛОГИ ПИШЕМО ТУТ (після if/else)
+    // Виводимо логи тільки ПІСЛЯ того, як відпрацював if/else
     console.log('Поточний вміст кошика:', this.cart);
-    console.log('Назва щойно доданого товару:', productData.name); 
-    console.log('Назви товарів у кошику:', this.cart.map(item => item.name).join(', '));
+    console.log('Назва товару у кошику:', productData.name);
     console.log('Кількість унікальних товарів у кошику:', this.cart.length);
     console.log('Загальна сума в кошику:', this.cart.reduce((total, item) => total + item.totalPrice, 0));
-  }}
+}}
