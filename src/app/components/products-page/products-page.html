@@ -12,12 +12,19 @@
       [imageUrl]="item.imageUrl"
       [quantity]="item.quantity"
 
- (buyEvent)="onProductBought($event)">  
-      >
+ (buyEvent)="onProductBought($event)"
+  (buyEvent)="addToCart($event)"
+ >  
+     </app-product-card>  }   
+
     <!-- (buyEvent)="onProductBought()"  отримуємо рядко  -->
-   <!--  (buyEvent)="onProductBought($event)">  отримуємо рядкові дані  -->
-    
-    
-    </app-product-card>
-  }
+   <!--  (buyEvent)="onProductBought($event)">  отримуємо рядкові дані 
+
+   <!-- <app-product-card 
+  [name]="item.name" 
+  [price]="item.price"
+  [quantity]="item.quantity"
+  (buyEvent)="addToCart($event)"> </app-product-card>   -->
+   
+
 </div>
