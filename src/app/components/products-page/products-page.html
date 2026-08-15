@@ -41,11 +41,21 @@
   </p>
 }
 
+<!-- Іконка кошика -->
+<div class="cart-icon-container" (click)="toggleCart()" style="cursor: pointer; text-align: left; padding: 10px;">
+  <span style="font-size: 24px;">🛒</span> 
+  <strong>Кошик ({{ totalItemsCount }})</strong>
+</div>
+<!-- Деталі кошика з'являться ТІЛЬКИ якщо isCartVisible дорівнює true -->
+
+@if (isCartVisible) {
 <hr>  
+
+
 
 <div class="cart-summary">
   <h2>Мій кошик</h2>
-  <p>Всього товарів: {{ cart.length }} шт.</p>
+  <p>Всього товарів: {{ totalItemsCount}} шт.</p>
 
   <!-- Починаємо виводити список -->
   <ul>
@@ -61,3 +71,4 @@
     <strong>Bсього </strong>  : {{ cart.reduce((total, item) => total + item.totalPrice, 0) }} грн
   </ul>
 </div>
+}

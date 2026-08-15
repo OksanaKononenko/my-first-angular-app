@@ -54,7 +54,13 @@ onProductBought(productData: {name: string, price: number, quantity: number}) {
       console.log(`Товар "${currentProduct.name}" додано! Залишок: ${currentProduct.quantity}`);
     }
 }
+// 0. Змінна-перемикач (за замовчуванням кошик прихований)
+  isCartVisible = false;
 
+  // 2. Функція для відкриття/закриття кошика
+  toggleCart() {
+    this.isCartVisible = !this.isCartVisible;
+  }
 
 // 1. Створюємо порожнє місце для покупок
 // Масив товарів у кошику
@@ -112,4 +118,9 @@ addToCart(productData: { name: string; price: number }) {
     console.log('Назва товару у кошику:', productData.name);
     console.log('Кількість унікальних товарів у кошику:', this.cart.length);
     console.log('Загальна сума в кошику:', this.cart.reduce((total, item) => total + item.totalPrice, 0));
-}}
+}
+
+// Ця функція пройдеться по всьому кошику і додасть усі quantity
+  get totalItemsCount(): number {
+    return this.cart.reduce((total, item) => total + item.quantity, 0);
+  }}
