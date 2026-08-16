@@ -62,8 +62,9 @@
     @for (product of cart; track $index) {
       <li>
         <strong>{{ product.name }}</strong> — ціна: {{ product.price }} грн — кількість: {{ product.quantity }} шт. —  ціна за товар: {{ product.totalPrice }} грн
-    
-    </li>
+   
+  <button (click)="testClick(product); removeFromCart(product)">❌ Видалити</button>
+      </li>
       
     } @empty {
       <li>Твій кошик поки що порожній. Час щось обрати!</li>
@@ -71,4 +72,4 @@
     <strong>Bсього </strong>  : {{ cart.reduce((total, item) => total + item.totalPrice, 0) }} грн
   </ul>
 </div>
-}
+} 
