@@ -9,12 +9,15 @@
 // export class ProductCard {}
 
 import { Component, Input, Output, EventEmitter } from '@angular/core'; // '@angular/core' це модуль, який містить основні функціональні можливості Angular, включаючи декоратори та інші інструменти для створення компонентів, директив та сервісів. 
+import { CurrencyPipe } from '@angular/common'; // Імпортуємо інструмент CurrencyPipe з бібліотеки common
+
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
   templateUrl: './product-card.html',
-  styleUrl: './product-card.css'
+  styleUrl: './product-card.css',
+  imports: [CurrencyPipe]
 })
 export class ProductCardComponent {
   // Ставимо @Input(), щоб картка могла отримати назву та ціну від батьківського компонента

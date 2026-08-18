@@ -2,6 +2,9 @@ import { Component, ChangeDetectorRef, inject} from '@angular/core';
  // Імпортуємо компонент ProductCardComponent/
  // Виходимо з папки products-page (..) і заходимо в сусідню папку product-card:
 import { ProductCardComponent } from '../product-card-component/product-card';
+// 1. Обов'язково імпортуємо інструмент CurrencyPipe з бібліотеки common
+import { CurrencyPipe } from '@angular/common';
+
 
 // Інтерфейс для елемента кошика
 interface CartItem {
@@ -14,10 +17,11 @@ interface CartItem {
 
 @Component({
   selector: 'app-products-page',
-  imports: [ProductCardComponent],
+  imports: [ProductCardComponent, CurrencyPipe],     // 2. Додаємо CurrencyPipe у масив imports, щоб HTML міг його побачити 
   templateUrl: './products-page.html',
   styleUrl: './products-page.css',
 })
+
 export class ProductsPage {
 
 productsList = [
@@ -112,7 +116,7 @@ testClick(product: CartItem) {
 
 // Підключаємо "пульт керування" оновленням екрана
   private cdr = inject(ChangeDetectorRef);
-  
+
 removeFromCart(product: any) {
   // 1. Повертаємо товар на вітрину
   const shelfItem = this.productsList.find(p => p.name === product.name);
