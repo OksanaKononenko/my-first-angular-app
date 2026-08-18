@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, inject} from '@angular/core';
  // Імпортуємо компонент ProductCardComponent/
  // Виходимо з папки products-page (..) і заходимо в сусідню папку product-card:
 import { ProductCardComponent } from '../product-card-component/product-card';
@@ -9,6 +9,7 @@ interface CartItem {
   price: number;
   quantity: number;
   totalPrice: number;
+  cdr?: ChangeDetectorRef; // Додаємо опціональне поле для ChangeDetectorRef
 }
 
 @Component({
@@ -107,43 +108,33 @@ testClick(product: CartItem) {
   console.log('Кнопка натиснута! Видаляємо товар:', product.name);
 }
 
-// Функція видалення товару з кошика
-removeFromCart(product: CartItem) {
-  // 1. Шукаємо цей товар на нашій вітрині (у головному масиві)
-  const shelfItem = this.productsList.find(item => item.name === product.name);
+      
+
+// Підключаємо "пульт керування" оновленням екрана
+  private cdr = inject(ChangeDetectorRef);
   
-  // 2. Якщо знайшли — повертаємо на полицю ту кількість, що лежала в кошику
+removeFromCart(product: any) {
+  // 1. Повертаємо товар на вітрину
+  const shelfItem = this.productsList.find(p => p.name === product.name);
   if (shelfItem) {
     shelfItem.quantity += product.quantity;
-      
   }
   
-  // 3. Викидаємо товар з масиву кошика (залишаємо всі, крім натиснутого)
+  // 2. Викидаємо товар з кошика
   this.cart = this.cart.filter(item => item.name !== product.name);
 
-  console.log('Товар видалено з кошика:', product.name);
-// 3. ОЧИЩЕННЯ ТА ЗАПИС НОВОЇ ФРАЗИ:
-  // Якщо ми видалили товар, який був "останнім доданим", очищаємо повідомлення
-  // if (this.lastAddedProduct ) {
-  //   this.lastAddedProduct = ''; // Прибираємо повідомлення з екрана
-  //   console.log('Повідомлення про доданий товар очищено');
-    
-  // }
-
-
-  // 3. ОСЬ ТУТ МИ ПЕРЕЗАПИСУЄМО ЗМІННУ:
+  // 3. ЗАПИСУЄМО НОВУ ФРАЗУ (     ` ` - це косі лапки біля клавіші Esc)
   this.lastAddedProduct = `Видалено: ${product.name}`; 
   
-  // Якщо хочеш, щоб повідомлення зникало через - секунди, додай це:
+  // 4. Запускаємо таймер очищення
   setTimeout(() => {
-    this.lastAddedProduct = '';
-    console.log('Повідомлення про видалення товару зникло');
-    // confirm('Повідомлення про видалення товару зникло');  повідомлення не зникне, бо confirm блокує виконання коду, тому краще його не використовувати
-  }, 1000);
-  
-  // Або, якщо ти хочеш записати фразу про видалення, можна зробити так:
-  // this.lastAddedProduct = `Видалено: ${product.name}`;
-   
+    this.lastAddedProduct = ''; 
+    
+    // ✅ ПРИМУСОВО кажемо Angular оновити екран, щоб напис точно зник
+    // ( треба підключити ChangeDetectorRef в imports і в конструкторі )
+    this.cdr.detectChanges(); 
+  }, 2000); // 2000 мс = 2 секунди
 }
 
+ 
 }     // кінець блоку export
